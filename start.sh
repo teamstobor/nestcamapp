@@ -1,1 +1,1 @@
-modprobe v4l2_common && python stream.py &
+modprobe v4l2_common && python -m SimpleHTTPServer 80 stream.py &
