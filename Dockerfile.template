@@ -4,6 +4,11 @@ FROM resin/%%RESIN_MACHINE_NAME%%-python
 ENV INITSYSTEM on
 ENV READTHEDOCS True
 
+RUN apt-get update \
+    && apt-get install -y dnsmasq wireless-tools \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # pip install python deps from requirements.txt
 # For caching until requirements.txt changes
 COPY ./requirements.txt /requirements.txt
@@ -11,6 +16,11 @@ RUN pip install -r /requirements.txt
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
+
+RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
+    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
+    | xargs -n1 curl -Ls \
+    | tar -xvz -C /usr/src/app/
 
 CMD ["bash","start.sh"]
 
