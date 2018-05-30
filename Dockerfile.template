@@ -9,8 +9,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# pip install python deps from requirements.txt
-# For caching until requirements.txt changes
+
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
