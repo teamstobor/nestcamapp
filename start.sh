@@ -1,3 +1,3 @@
 #!/bin/bash
-systemctl enable timelapse
-systemctl start timelapse
+python -m SimpleHTTPServer &
+python timelapse.py &
