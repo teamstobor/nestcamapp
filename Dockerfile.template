@@ -8,7 +8,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 COPY ./requirements.txt /requirements.txt
 
-RUN sudo raspi-config nonint do_camera 1 && sudo apt-get install -y python-picamera python-yaml imagemagick && git clone https://github.com/geerlingguy/pi-timelapse.git && sudo cd pi-timelapse && cp timelapse.service /etc/systemd/system/timelapse.service && cp ../config.yaml . && pip install -r /requirements.txt && sudo systemctl daemon-reload && sudo systemctl enable timelapse
+RUN sudo apt-get update &&sudo apt-get install raspi-config && sudo raspi-config nonint do_camera 1 && sudo apt-get install -y python-picamera python-yaml imagemagick && git clone https://github.com/geerlingguy/pi-timelapse.git && sudo cd pi-timelapse && cp timelapse.service /etc/systemd/system/timelapse.service && cp ../config.yaml . && pip install -r /requirements.txt && sudo systemctl daemon-reload && sudo systemctl enable timelapse
 
 CMD ["bash","start.sh"]
 
