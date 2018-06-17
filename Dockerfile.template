@@ -4,22 +4,19 @@ FROM resin/%%RESIN_MACHINE_NAME%%-python
 ENV INITSYSTEM on
 ENV READTHEDOCS True
 
-RUN apt-get update \
-    && apt-get install -y dnsmasq wireless-tools \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-
 COPY . /usr/src/app
 WORKDIR /usr/src/app
+COPY ./requirements.txt /requirements.txt
 
-RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
-    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
-    | xargs -n1 curl -Ls \
-    | tar -xvz -C /usr/src/app/
+RUN sudo raspi-config nonint do_camera 1 &&
+    sudo apt-get install -y python-picamera python-yaml imagemagick &&
+    git clone https://github.com/geerlingguy/pi-timelapse.git &&
+    cd pi-timelapse &&
+    sudo cp timelapse.service /etc/systemd/system/timelapse.service &&
+    cp ../config.yaml . &&
+    pip install -r /requirements.txt &&
+    sudo systemctl daemon-reload &&
+    sudo systemctl enable timelapse
 
 CMD ["bash","start.sh"]
 
