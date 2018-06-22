@@ -37,3 +37,6 @@ white_balance: { }
 
 # Rotate the images taken by the camera. Possible value are 0, 90, 180 or 270
 rotation: 0
+
+# Output directory
+output_dir: nestpics

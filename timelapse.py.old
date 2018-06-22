@@ -1,19 +1,18 @@
+from picamera import PiCamera
 import errno
 import os
 import sys
-import time 
+import threading
+from datetime import datetime
+from time import sleep
 import yaml
 
-from datetime import datetime
-from picamera import PiCamera
-
 config = yaml.safe_load(open(os.path.join(sys.path[0], "config.yml")))
+image_number = 0
 
-output_dir = config['output_dir']
 
-def create_output_dir(dir):
+def create_timestamped_dir(dir):
     try:
-    if not os.path.exists(dir):
         os.makedirs(dir)
     except OSError as e:
         if e.errno != errno.EEXIST:
@@ -56,19 +55,48 @@ def set_camera_options(camera):
 
 def capture_image():
     try:
+        global image_number
+
+        # Set a timer to take another picture at the proper interval after this
+        # picture is taken.
+        if (image_number < (config['total_images'] - 1)):
+            thread = threading.Timer(config['interval'], capture_image).start()
+
         # Start up the camera.
         camera = PiCamera()
         set_camera_options(camera)
 
         # Capture a picture.
-        camera.capture(output_dir + '/image-' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.jpg'
+        camera.capture(dir + '/image{0:05d}.jpg'.format(image_number))
         camera.close()
+
+        if (image_number < (config['total_images'] - 1)):
+            image_number += 1
+        else:
+            print '\nTime-lapse capture complete!\n'
+            # TODO: This doesn't pop user into the except block below :(.
+            sys.exit()
 
     except KeyboardInterrupt, SystemExit:
         print '\nTime-lapse capture cancelled.\n'
 
-
-create_output_dir(output_dir)
+# Create directory based on current timestamp.
+dir = os.path.join(
+    sys.path[0],
+    'series-' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+)
+create_timestamped_dir(dir)
 
 # Kick off the capture process.
 capture_image()
+
+# TODO: These may not get called after the end of the threading process...
+# Create an animated gif (Requires ImageMagick).
+if config['create_gif']:
+    print '\nCreating animated gif.\n'
+    os.system('convert -delay 10 -loop 0 ' + dir + '/image*.jpg ' + dir + '-timelapse.gif')  # noqa
+
+# Create a video (Requires avconv - which is basically ffmpeg).
+if config['create_video']:
+    print '\nCreating video.\n'
+    os.system('avconv -framerate 20 -i ' + dir + '/image%05d.jpg -vf format=yuv420p ' + dir + '/timelapse.mp4')  # noqa
