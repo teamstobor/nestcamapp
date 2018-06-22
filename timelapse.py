@@ -13,8 +13,8 @@ output_dir = config['output_dir']
 
 def create_output_dir(dir):
     try:
-    if not os.path.exists(dir):
-        os.makedirs(dir)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
