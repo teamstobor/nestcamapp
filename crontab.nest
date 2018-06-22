@@ -1,0 +1,2 @@
+1/1 * * * * /usr/src/app/captureImage.sh
+0,10,20,30,40,50 * * * * /usr/arc/app/processImages.sh
