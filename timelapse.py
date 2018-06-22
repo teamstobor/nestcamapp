@@ -62,6 +62,7 @@ def capture_image():
 
         # Capture a picture.
         camera.capture(output_dir + '/image-' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.jpg')
+        sleep(2)
         camera.close()
 
     except KeyboardInterrupt, SystemExit:
