@@ -1,9 +1,5 @@
 [Unit]
-Description=Run capture image
-Wants=capture-image.timer
+Description=Capture image
 
 [Service]
 ExecStart=/bin/date >> /usr/src/app/sam
-
-[Install]
-WantedBy=capture-image.target
