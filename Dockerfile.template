@@ -8,9 +8,11 @@ WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
 	python-picamera python-yaml imagemagick \
-	&& apt-get clean && rm -rf /var/lib/apt/lists/* && pip install -r ./requirements.txt \
-    && cp ./capture-image.timer /etc/systemd/system \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/* && pip install -r ./requirements.txt 
+
+RUN cp ./capture-image.timer /etc/systemd/system \
     && cp ./capture-image.target /etc/systemd/system \
-    && cp ./capture-image.service /etc/systemd/system \
-    && systemctl enable /etc/systemd/system/capture-image.service \
-    && systemctl start  /etc/systemd/system/capture-image.timer
+    && cp ./capture-image.service /etc/systemd/system 
+
+RUN systemctl start  /etc/systemd/system/capture-image.timer
+
