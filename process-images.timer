@@ -1,0 +1,6 @@
+[Unit]
+Description=Process images every hour
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*-*-* *:00:00
