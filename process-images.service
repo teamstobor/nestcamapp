@@ -2,4 +2,4 @@
 Description=Process images
 
 [Service]
-ExecStart=/bin/sh -c '/usr/src/app/processImages.sh'
+ExecStart=/bin/sh /usr/src/app/processImages.sh
