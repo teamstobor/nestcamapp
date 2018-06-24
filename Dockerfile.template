@@ -12,6 +12,5 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     && cp ./capture-image.timer /etc/systemd/system \
     && cp ./capture-image.target /etc/systemd/system \
     && cp ./capture-image.service /etc/systemd/system \
-    && systemctl enable /etc/systemd/system/capture-image.timer \
     && systemctl enable /etc/systemd/system/capture-image.service \
     && systemctl start  /etc/systemd/system/capture-image.timer
