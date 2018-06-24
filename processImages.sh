@@ -1,6 +1,6 @@
 #!/bin/bash
 firstFile=""
-for file in ./nestpics/*
+for file in /home/pi/nestpics/*
 do
    echo $file
    if [ -z $firstFile ]
@@ -13,9 +13,9 @@ do
             1)
                 if [ ! -d "./output" ]
                 then
-                    mkdir ./output                    
+                    mkdir -p /home/pi/output                    
                 fi
-                cp $file ./output
+                cp $file /home/pi/output
                 firstFile=$file
                 ;;
             *)
