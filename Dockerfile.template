@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 
 RUN cp ./capture-image.timer /etc/systemd/system \
     && cp ./capture-image.service /etc/systemd/system 
+ 
+CMD /usr/src/app/startWebServer.sh
 
-CMD systemctl start /etc/systemd/system/capture-image.timer
 
 
