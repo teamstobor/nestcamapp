@@ -15,4 +15,4 @@ RUN cp ./capture-image.timer /etc/systemd/system \
 	&& cp ./process-images.timer /etc/systemd/system \
     && cp ./process-images.service /etc/systemd/system 
  
-CMD /usr/src/app/startWebServer.sh
+CMD ["bash", "usr/src/app/startWebServer.sh"]
