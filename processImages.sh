@@ -2,6 +2,7 @@
 firstFile=""
 for file in ./nestpics/*
 do
+   echo $file
    if [ -z $firstFile ]
    then
       firstFile=$file

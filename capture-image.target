@@ -1,0 +1,4 @@
+[Unit]
+Description=Minute Timer Target
+StopWhenUnneeded=yes
+

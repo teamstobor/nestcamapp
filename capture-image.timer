@@ -1,0 +1,11 @@
+[Unit]
+Description=Capture image every minute
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*-*-* *:*:00
+Unit=capture-image.target
+
+[Install]
+WantedBy=basic.target
+
