@@ -2,5 +2,5 @@
 Description=Capture image
 
 [Service]
-ExecStart=/bin/sh /usr/src/app/captureImage.sh
+ExecStart=/bin/bash /usr/src/app/captureImage.sh
 
