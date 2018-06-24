@@ -2,4 +2,8 @@
 Description=Process images
 
 [Service]
-ExecStart=/bin/bash /usr/src/app/processImages.sh
+ExecStart=/usr/src/app/processImages.sh
+
+[Install]
+WantedBy=multi-user.target
+

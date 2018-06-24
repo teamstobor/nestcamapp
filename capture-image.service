@@ -2,5 +2,9 @@
 Description=Capture image
 
 [Service]
-ExecStart=/bin/bash /usr/src/app/captureImage.sh
+ExecStart=/usr/src/app/captureImage.sh
+
+[Install]
+WantedBy=multi-user.target
+
 

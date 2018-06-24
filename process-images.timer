@@ -4,3 +4,8 @@ Description=Process images every hour
 [Timer]
 OnBootSec=5min
 OnCalendar=*-*-* *:00:00
+Unit=process-images.service
+
+[Install]
+WantedBy=multi-user.target
+
