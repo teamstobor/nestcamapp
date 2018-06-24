@@ -1,1 +1,1 @@
-*/1 * * * * python /usr/src/app/nestcamapp/timelapse.py
+*/1 * * * * python /home/pi/nestcamapp/timelapse.py
