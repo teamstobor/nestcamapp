@@ -49,4 +49,3 @@ def test(HandlerClass=RootedHTTPRequestHandler, ServerClass=RootedHTTPServer):
 
 if __name__ == '__main__':
     test()
-
