@@ -13,7 +13,6 @@ import time
 import sys
 from datetime import datetime
 from PIL import Image
-sys.modules['Image'] = Image
 
 # Motion detection settings:
 # Threshold          - how much a pixel has to change by to be marked as "changed"
@@ -27,7 +26,7 @@ threshold = 10
 sensitivity = 20
 forceCapture = True
 forceCaptureTime = 60 * 60 # Once an hour
-filepath = "/usr/src/app/picam"
+filepath = "/home/pi/picam"
 filenamePrefix = "capture"
 diskSpaceToReserve = 40 * 1024 * 1024 # Keep 40 mb free on disk
 cameraSettings = ""
