@@ -7,7 +7,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
-	python-picamera imagemagick python-imaging-tk \
+	python-picamera imagemagick python-pillow \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* && pip install -r ./requirements.txt 
  
 CMD ["bash", "/usr/src/app/start.sh"]
