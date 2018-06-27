@@ -10,8 +10,10 @@ import StringIO
 import subprocess
 import os
 import time
+import sys
 from datetime import datetime
 from PIL import Image
+sys.modules['Image'] = Image
 
 # Motion detection settings:
 # Threshold          - how much a pixel has to change by to be marked as "changed"
