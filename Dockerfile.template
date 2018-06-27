@@ -3,13 +3,7 @@ FROM resin/%%RESIN_MACHINE_NAME%%-python
 ENV INITSYSTEM on
 ENV READTHEDOCS True
 
-COPY Dockerfile.template /usr/src/app
-COPY capturePic.py /usr/src/app
-COPY requirements.txt /usr/src/app
-COPY webServer.py /usr/src/app
-COPY start.sh /usr/src/app
-
-
+COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
